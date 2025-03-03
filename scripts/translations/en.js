@@ -18,47 +18,27 @@ const en = {
         carPolish: {
             title: "Car Polish",
             description: "Professional exterior polishing and paint correction for a showroom-worthy finish.",
-            features: [
-                "Paint correction",
-                "Swirl removal",
-                "Deep shine restoration"
-            ]
+            features: ["Paint correction", "Swirl removal", "Deep shine restoration"]
         },
         headlightsPolish: {
             title: "Headlights Polish",
             description: "Restore clarity and brightness to your headlights for better visibility and appearance.",
-            features: [
-                "UV protection",
-                "Yellowing removal",
-                "Crystal clear finish"
-            ]
+            features: ["UV protection", "Yellowing removal", "Crystal clear finish"]
         },
         headlightsRestoration: {
             title: "Headlights Restoration",
             description: "Complete restoration of severely damaged or oxidized headlights.",
-            features: [
-                "Deep restoration",
-                "Protective coating",
-                "Long-lasting results"
-            ]
+            features: ["Deep restoration", "Protective coating", "Long-lasting results"]
         },
         angelEyes: {
             title: "Angel Eyes Mount",
             description: "Custom installation of angel eyes for a unique and modern look.",
-            features: [
-                "Professional installation",
-                "Various styles available",
-                "Quality LED systems"
-            ]
+            features: ["Professional installation", "Various styles available", "Quality LED systems"]
         },
         interiorDetailing: {
             title: "Interior Detailing",
             description: "Deep cleaning and restoration of your car's interior surfaces.",
-            features: [
-                "Leather treatment",
-                "Carpet shampooing",
-                "Full sanitization"
-            ]
+            features: ["Leather treatment", "Carpet shampooing", "Full sanitization"]
         }
     },
     gallery: {

@@ -358,6 +358,14 @@ section h2 {
     height: 300px;
     cursor: col-resize;
     overflow: hidden;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.before-after-slider.resizing {
+    cursor: grabbing;
 }
 
 .before-image,
@@ -367,15 +375,17 @@ section h2 {
     left: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
 }
 
 .before-image {
-    z-index: 1;
+    z-index: 2;
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    transition: clip-path 0.1s ease-out;
 }
 
 .after-image {
-    z-index: 0;
+    z-index: 1;
 }
 
 .before-image img,
@@ -389,11 +399,12 @@ section h2 {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 2px;
+    width: 4px;
     height: 100%;
     background: var(--text-light);
-    z-index: 2;
+    z-index: 3;
     transform: translateX(-50%);
+    transition: left 0.1s ease-out;
 }
 
 .slider-handle::before {
@@ -402,11 +413,12 @@ section h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: var(--text-light);
     border-radius: 50%;
     border: 3px solid var(--primary-black);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider-handle::after {
@@ -418,6 +430,7 @@ section h2 {
     color: var(--primary-black);
     font-size: 1.2rem;
     font-weight: bold;
+    pointer-events: none;
 }
 
 .label {
@@ -428,6 +441,9 @@ section h2 {
     color: var(--text-light);
     border-radius: 5px;
     font-size: 0.9rem;
+    z-index: 4;
+    pointer-events: none;
+    user-select: none;
 }
 
 .before-image .label {
