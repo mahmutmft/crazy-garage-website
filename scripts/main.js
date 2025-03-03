@@ -243,41 +243,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sliders.forEach(slider => {
         const beforeImage = slider.querySelector('.before-image');
+        const sliderHandle = slider.querySelector('.slider-handle');
         let isResizing = false;
+        let startX = 0;
 
-        slider.addEventListener('mousedown', startResizing);
-        document.addEventListener('mousemove', moveSlider);
-        document.addEventListener('mouseup', stopResizing);
+        function updateSliderPosition(clientX) {
+            const rect = slider.getBoundingClientRect();
+            const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+            const percentage = (x / rect.width) * 100;
 
-        // Touch events
-        slider.addEventListener('touchstart', startResizing);
-        document.addEventListener('touchmove', moveSlider);
-        document.addEventListener('touchend', stopResizing);
-
-        function startResizing(e) {
-            isResizing = true;
-            slider.classList.add('resizing');
+            beforeImage.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+            sliderHandle.style.left = `${percentage}%`;
         }
 
-        function stopResizing(e) {
+        function handleStart(e) {
+            isResizing = true;
+            slider.classList.add('resizing');
+            startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            updateSliderPosition(startX);
+        }
+
+        function handleMove(e) {
+            if (!isResizing) return;
+            e.preventDefault();
+            const currentX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            updateSliderPosition(currentX);
+        }
+
+        function handleEnd() {
             isResizing = false;
             slider.classList.remove('resizing');
         }
 
-        function moveSlider(e) {
-            if (!isResizing) return;
+        // Mouse events
+        slider.addEventListener('mousedown', handleStart);
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+        document.addEventListener('mouseleave', handleEnd);
 
-            const event = e.type === 'mousemove' ? e : e.touches[0];
-            const rect = slider.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const percentage = (x / rect.width) * 100;
+        // Touch events
+        slider.addEventListener('touchstart', handleStart, { passive: false });
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
+        document.addEventListener('touchcancel', handleEnd);
 
-            // Constrain percentage between 0 and 100
-            const clampedPercentage = Math.min(Math.max(percentage, 0), 100);
+        // Initialize slider position to 50% (middle)
+        const rect = slider.getBoundingClientRect();
+        const middleX = rect.left + (rect.width / 2);
+        updateSliderPosition(middleX);
 
-            beforeImage.style.clipPath = `polygon(0 0, ${clampedPercentage}% 0, ${clampedPercentage}% 100%, 0 100%)`;
-            slider.querySelector('.slider-handle').style.left = `${clampedPercentage}%`;
-        }
+        // Also set initial styles directly
+        beforeImage.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+        sliderHandle.style.left = '50%';
     });
 });
 
