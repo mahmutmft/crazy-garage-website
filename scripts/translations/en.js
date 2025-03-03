@@ -79,8 +79,8 @@ const en = {
                 description: "Complete restoration of oxidized headlights"
             },
             audi: {
-                title: "Audi Interior Detailing",
-                description: "Deep cleaning and leather restoration"
+                title: "Interior Door Panel Restoration",
+                description: "Deep cleaning and restoration of door panels"
             }
         },
         labels: {

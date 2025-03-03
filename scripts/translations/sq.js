@@ -79,8 +79,8 @@ const sq = {
                 description: "Restaurim i plotë i dritave të oksiduara"
             },
             audi: {
-                title: "Detajimi i Brendshëm i Audi",
-                description: "Pastrim i thellë dhe restaurim i lëkurës"
+                title: "Restaurimi i Panelit të Brendshëm",
+                description: "Pastrim i thellë dhe restaurim i paneleve të dyerve"
             }
         },
         labels: {
